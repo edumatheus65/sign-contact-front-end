@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import Logo from "../../assets/Logo.png";
 
 export const Header = () => {
@@ -7,8 +8,8 @@ export const Header = () => {
         <div>
           <img src={Logo} alt="Logo Sign Contact" />
           <div>
-            <button>Cadastre-se</button>
-            <button>Entrar</button>
+            <Link to="/register">Cadastre-se</Link>
+            <Link to="/">Entrar</Link>
           </div>
         </div>
       </div>
