@@ -1,3 +1,9 @@
+import { DefaultTemplate } from "../../components/DefaultTemplate";
+
 export const Login = () => {
-  return <h2>Login</h2>;
+  return (
+    <DefaultTemplate>
+      <h2>Login</h2>
+    </DefaultTemplate>
+  );
 };
