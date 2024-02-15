@@ -1,6 +1,8 @@
 import { AiOutlineArrowLeft } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
+import { Input } from "../Input";
+import { InputPassword } from "../InputPassword";
 
 export const RegisterForm = () => {
   const { register, handleSubmit } = useForm();
@@ -22,14 +24,29 @@ export const RegisterForm = () => {
             <Link to={"/"}>Voltar</Link>
           </div>
         </div>
-        <label>Nome Completo:</label>
-        <input type="text" {...register("fullName")} />
-        <label>Email:</label>
-        <input type="email" {...register("email")} />
-        <label>Senha:</label>
-        <input type="password" {...register("password")} />
-        <label>Telefone:</label>
-        <input type="text" {...register("phone")} />
+        <Input
+          label="Nome Completo:"
+          type="text"
+          placeholder="Digite o seu nome completo"
+          {...register("fullName")}
+        />
+        <Input
+          label="Email:"
+          type="email"
+          placeholder="Digite o seu email:"
+          {...register("email")}
+        />
+        <InputPassword
+          label="Senha:"
+          placeholder="Digite a sua senha:"
+          {...register("password")}
+        />
+        <Input
+          label="Telefone:"
+          type="text"
+          placeholder="Digite o seu telefone:"
+          {...register("phone")}
+        />
         <button type="submit">Cadastrar-se</button>
       </form>
     </div>
