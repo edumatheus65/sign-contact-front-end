@@ -1,11 +1,13 @@
 import { useForm } from "react-hook-form";
 import { Input } from "../Input";
 import { InputPassword } from "../InputPassword";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { loginFormSchema } from "./loginFormSchema";
+import { useState } from "react";
+import { signContactApi } from "../../../services/api";
 
-export const LoginForm = () => {
+export const LoginForm = ({ setClient }) => {
   const {
     register,
     handleSubmit,
@@ -14,8 +16,28 @@ export const LoginForm = () => {
     resolver: zodResolver(loginFormSchema),
   });
 
-  const submit = (formdata) => {
-    console.log(formdata);
+  const navigate = useNavigate();
+
+  const [loading, setLoading] = useState(false);
+
+  const clientLoginRequest = async (formData) => {
+    try {
+      setLoading(true);
+      const { data } = await signContactApi.post("/login", formData);
+      setClient(data.client);
+      localStorage.setItem("@ClientToken", JSON.stringify(data.token));
+      navigate("/dashboard");
+    } catch (error) {
+      if (error.response?.data.message == "Invalid Credentials !") {
+        alert("E-mail e/ou senha inválidos");
+      }
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const submit = (formData) => {
+    clientLoginRequest(formData);
   };
 
   return (
