@@ -5,6 +5,8 @@ import { Input } from "../Input";
 import { InputPassword } from "../InputPassword";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { registerFormSchema } from "./registerFormSchema";
+import { signContactApi } from "../../../services/api";
+import { useState } from "react";
 
 export const RegisterForm = () => {
   const {
@@ -15,8 +17,27 @@ export const RegisterForm = () => {
     resolver: zodResolver(registerFormSchema),
   });
 
+  const [loading, setLoading] = useState(false);
+
+  const clientRegister = async (formData) => {
+    try {
+      setLoading(true);
+      await signContactApi.post("/clients", formData);
+      alert("Cadastro realizado com sucesso!");
+    } catch (error) {
+      if (
+        error.response?.data.message == "Email Already exists" ||
+        error.response?.data.message == "Phone Already exists"
+      ) {
+        alert("Cliente já cadastrado");
+      }
+    } finally {
+      setLoading(false);
+    }
+  };
+
   const submit = (formdata) => {
-    console.log(formdata);
+    clientRegister(formdata);
   };
 
   return (
@@ -38,6 +59,7 @@ export const RegisterForm = () => {
           placeholder="Digite o seu nome completo"
           {...register("fullName")}
           error={errors.fullName}
+          disabled={loading}
         />
         <Input
           label="Email:"
