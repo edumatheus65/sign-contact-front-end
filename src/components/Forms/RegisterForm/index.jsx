@@ -41,6 +41,11 @@ export const RegisterForm = () => {
           placeholder="Digite a sua senha:"
           {...register("password")}
         />
+        <InputPassword
+          label="Confirmar Senha:"
+          placeholder="Confirme a sua senha:"
+          {...register("confirmPassword")}
+        />
         <Input
           label="Telefone:"
           type="text"
