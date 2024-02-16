@@ -7,6 +7,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { registerFormSchema } from "./registerFormSchema";
 import { signContactApi } from "../../../services/api";
 import { useState } from "react";
+import { toast } from "react-toastify";
 
 export const RegisterForm = () => {
   const {
@@ -23,13 +24,13 @@ export const RegisterForm = () => {
     try {
       setLoading(true);
       await signContactApi.post("/clients", formData);
-      alert("Cadastro realizado com sucesso!");
+      toast.success("Cadastro realizado com sucesso!");
     } catch (error) {
       if (
         error.response?.data.message == "Email Already exists" ||
         error.response?.data.message == "Phone Already exists"
       ) {
-        alert("Cliente já cadastrado");
+        toast.error("Cliente já cadastrado");
       }
     } finally {
       setLoading(false);
