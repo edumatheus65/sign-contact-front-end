@@ -5,6 +5,9 @@ import { Input } from "../Input";
 import { InputPassword } from "../InputPassword";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { registerFormSchema } from "./registerFormSchema";
+import { signContactApi } from "../../../services/api";
+import { useState } from "react";
+import { toast } from "react-toastify";
 
 export const RegisterForm = () => {
   const {
@@ -15,8 +18,27 @@ export const RegisterForm = () => {
     resolver: zodResolver(registerFormSchema),
   });
 
+  const [loading, setLoading] = useState(false);
+
+  const clientRegister = async (formData) => {
+    try {
+      setLoading(true);
+      await signContactApi.post("/clients", formData);
+      toast.success("Cadastro realizado com sucesso!");
+    } catch (error) {
+      if (
+        error.response?.data.message == "Email Already exists" ||
+        error.response?.data.message == "Phone Already exists"
+      ) {
+        toast.error("Cliente já cadastrado");
+      }
+    } finally {
+      setLoading(false);
+    }
+  };
+
   const submit = (formdata) => {
-    console.log(formdata);
+    clientRegister(formdata);
   };
 
   return (
@@ -38,6 +60,7 @@ export const RegisterForm = () => {
           placeholder="Digite o seu nome completo"
           {...register("fullName")}
           error={errors.fullName}
+          disabled={loading}
         />
         <Input
           label="Email:"
@@ -45,18 +68,21 @@ export const RegisterForm = () => {
           placeholder="Digite o seu email:"
           {...register("email")}
           error={errors.email}
+          disabled={loading}
         />
         <InputPassword
           label="Senha:"
           placeholder="Digite a sua senha:"
           {...register("password")}
           error={errors.password}
+          disabled={loading}
         />
         <InputPassword
           label="Confirmar Senha:"
           placeholder="Confirme a sua senha:"
           {...register("confirmPassword")}
           error={errors.confirmPassword}
+          disabled={loading}
         />
         <Input
           label="Telefone:"
@@ -64,8 +90,11 @@ export const RegisterForm = () => {
           placeholder="Digite o seu telefone:"
           {...register("phone")}
           error={errors.phone}
+          disabled={loading}
         />
-        <button type="submit">Cadastrar-se</button>
+        <button type="submit" disabled={loading}>
+          {loading ? "Cadastrando" : "Cadastrar-se"}
+        </button>
       </form>
     </div>
   );
