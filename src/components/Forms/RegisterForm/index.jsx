@@ -67,18 +67,21 @@ export const RegisterForm = () => {
           placeholder="Digite o seu email:"
           {...register("email")}
           error={errors.email}
+          disabled={loading}
         />
         <InputPassword
           label="Senha:"
           placeholder="Digite a sua senha:"
           {...register("password")}
           error={errors.password}
+          disabled={loading}
         />
         <InputPassword
           label="Confirmar Senha:"
           placeholder="Confirme a sua senha:"
           {...register("confirmPassword")}
           error={errors.confirmPassword}
+          disabled={loading}
         />
         <Input
           label="Telefone:"
@@ -86,8 +89,11 @@ export const RegisterForm = () => {
           placeholder="Digite o seu telefone:"
           {...register("phone")}
           error={errors.phone}
+          disabled={loading}
         />
-        <button type="submit">Cadastrar-se</button>
+        <button type="submit" disabled={loading}>
+          {loading ? "Cadastrando" : "Cadastrar-se"}
+        </button>
       </form>
     </div>
   );
