@@ -5,6 +5,7 @@ import { Dashboard } from "../pages/Dashboard";
 import { ErrorPage } from "../pages/ErrorPage";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 export const RoutesMain = () => {
   const [client, setClient] = useState(null);
@@ -13,6 +14,7 @@ export const RoutesMain = () => {
 
   const clientLogout = () => {
     setClient(null);
+    toast.warning("Deslogando...");
     localStorage.removeItem("@ClientToken");
     navigate("/");
   };

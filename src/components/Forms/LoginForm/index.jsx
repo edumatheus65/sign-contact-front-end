@@ -6,6 +6,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { loginFormSchema } from "./loginFormSchema";
 import { useState } from "react";
 import { signContactApi } from "../../../services/api";
+import { toast } from "react-toastify";
 
 export const LoginForm = ({ setClient }) => {
   const {
@@ -25,11 +26,12 @@ export const LoginForm = ({ setClient }) => {
       setLoading(true);
       const { data } = await signContactApi.post("/login", formData);
       setClient(data.client);
+      toast.success(`Seja bem vindo, ${data.client.fullName}`);
       localStorage.setItem("@ClientToken", JSON.stringify(data.token));
       navigate("/dashboard");
     } catch (error) {
       if (error.response?.data.message == "Invalid Credentials !") {
-        alert("E-mail e/ou senha inválidos");
+        toast.error("E-mail e/ou senha inválidos");
       }
     } finally {
       setLoading(false);
@@ -50,14 +52,18 @@ export const LoginForm = ({ setClient }) => {
           placeholder="Digite o seu email:"
           {...register("email")}
           error={errors.email}
+          disabled={loading}
         />
         <InputPassword
           label="Senha:"
           placeholder="Digite a sua senha:"
           {...register("password")}
           error={errors.password}
+          disabled={loading}
         />
-        <button type="submit">Entrar</button>
+        <button type="submit" disabled={loading}>
+          {loading ? "Entrando" : "Entrar"}
+        </button>
         <div>
           <p>Ainda não possuí uma conta?</p>
           <Link to="/register">Cadastre-se</Link>
