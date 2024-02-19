@@ -1,0 +1,17 @@
+.flexbox {
+  justify-content: space-between;
+}
+
+@media (min-width: 500px) {
+  .flexbox {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+  }
+}
+
+.containerBtn {
+  display: flex;
+  gap: 5px;
+}

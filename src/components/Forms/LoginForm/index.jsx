@@ -43,7 +43,7 @@ export const LoginForm = ({ setClient }) => {
   };
 
   return (
-    <div>
+    <div className="container form">
       <form onSubmit={handleSubmit(submit)}>
         <h3>Login</h3>
         <Input

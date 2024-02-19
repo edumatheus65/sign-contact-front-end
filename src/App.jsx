@@ -7,7 +7,7 @@ const App = () => {
   return (
     <div className="App">
       <RoutesMain />
-      <ToastContainer position="top-right" autoClose={1300} theme="dark" />
+      <ToastContainer position="top-right" autoClose={1300} />
     </div>
   );
 };
