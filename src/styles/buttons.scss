@@ -1,0 +1,52 @@
+%buttonDefaults {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  font-family: var(--font-primary);
+  font-size: 0.9rem;
+  font-weight: 700;
+  transition: 0.4s;
+  border: 1px solid;
+}
+
+.btn {
+  @extend %buttonDefaults;
+  padding: 0 16px;
+  color: var(--color-gray-2);
+  height: 2.6875rem;
+  background-color: var(--color-yellow);
+  border: 1px solid var(--color-yellow);
+  border-radius: 255px;
+
+  &:hover {
+    background-color: #ffe066;
+  }
+}
+
+.signupBtn {
+  @extend %buttonDefaults;
+  padding: 0 16px;
+  height: 2.6875rem;
+  color: var(--color-gray-2);
+  border: 1px solid var(--color-white);
+  background-color: var(--color-white);
+  border-radius: 255px;
+  &:hover {
+    filter: brightness(1.2);
+  }
+}
+
+.link {
+  @extend %buttonDefaults;
+  color: var(--color-yellow);
+  border: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.arrow {
+  color: var(--color-yellow);
+}

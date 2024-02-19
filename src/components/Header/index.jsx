@@ -8,8 +8,12 @@ export const Header = () => {
         <div>
           <img src={Logo} alt="Logo Sign Contact" />
           <div>
-            <Link to="/register">Cadastre-se</Link>
-            <Link to="/">Entrar</Link>
+            <Link className="signupBtn" to="/register">
+              Cadastre-se
+            </Link>
+            <Link className="btn" to="/">
+              Entrar
+            </Link>
           </div>
         </div>
       </div>

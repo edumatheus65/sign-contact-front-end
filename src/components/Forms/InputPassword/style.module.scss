@@ -1,0 +1,24 @@
+.inputBox {
+  .inputGrid {
+    position: relative;
+  }
+  input {
+    margin-top: 9px;
+    width: 100%;
+    font-family: var(--font-primary);
+    font-size: clamp(0.5rem, 3vw, 0.82rem);
+    color: var(--color-white);
+    font-weight: 700;
+    padding: 0 20px;
+    height: 3.4rem;
+    background-color: var(--color-gray-1);
+  }
+
+  button {
+    font-size: clamp(0.7rem, 4vw, 1.2rem);
+    top: 1.55rem;
+    right: 1.4rem;
+    position: absolute;
+    color: var(--color-yellow);
+  }
+}

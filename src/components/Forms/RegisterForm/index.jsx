@@ -50,8 +50,10 @@ export const RegisterForm = () => {
             <p>Preencha os campos para cadastrar-se</p>
           </div>
           <div>
-            <AiOutlineArrowLeft />
-            <Link to={"/"}>Voltar</Link>
+            <AiOutlineArrowLeft className="arrow" />
+            <Link className="link" to={"/"}>
+              Voltar
+            </Link>
           </div>
         </div>
         <Input
@@ -92,7 +94,7 @@ export const RegisterForm = () => {
           error={errors.phone}
           disabled={loading}
         />
-        <button type="submit" disabled={loading}>
+        <button className="btn" type="submit" disabled={loading}>
           {loading ? "Cadastrando" : "Cadastrar-se"}
         </button>
       </form>
