@@ -5,7 +5,7 @@ import styles from "../../styles/pageBox.module.scss";
 export const Login = ({ setClient }) => {
   return (
     <DefaultTemplate>
-      <div className={styles.pageBox}>
+      <div className={styles.pageBoxLogin}>
         <LoginForm setClient={setClient} />
       </div>
     </DefaultTemplate>

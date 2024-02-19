@@ -7,6 +7,7 @@ import { loginFormSchema } from "./loginFormSchema";
 import { useState } from "react";
 import { signContactApi } from "../../../services/api";
 import { toast } from "react-toastify";
+import styles from "./styles.module.scss";
 
 export const LoginForm = ({ setClient }) => {
   const {
@@ -45,7 +46,7 @@ export const LoginForm = ({ setClient }) => {
   return (
     <div className="container form">
       <form onSubmit={handleSubmit(submit)}>
-        <h3>Login</h3>
+        <h3 className="title one">Login</h3>
         <Input
           label="Email:"
           type="email"
@@ -61,12 +62,21 @@ export const LoginForm = ({ setClient }) => {
           error={errors.password}
           disabled={loading}
         />
-        <button type="submit" disabled={loading}>
-          {loading ? "Entrando" : "Entrar"}
-        </button>
-        <div>
-          <p>Ainda não possuí uma conta?</p>
-          <Link to="/register">Cadastre-se</Link>
+        <div className={styles.flexbox}>
+          <button
+            id={styles.btnLogin}
+            className="btn"
+            type="submit"
+            disabled={loading}
+          >
+            {loading ? "Entrando" : "Entrar"}
+          </button>
+          <div className={styles.gap}>
+            <p className="paragraph">Ainda não possuí uma conta?</p>
+            <Link id={styles.link} className="link" to="/register">
+              Cadastre-se
+            </Link>
+          </div>
         </div>
       </form>
     </div>
