@@ -1,5 +1,5 @@
 import { AiOutlineArrowLeft } from "react-icons/ai";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { Input } from "../Input";
 import { InputPassword } from "../InputPassword";
@@ -8,6 +8,7 @@ import { registerFormSchema } from "./registerFormSchema";
 import { signContactApi } from "../../../services/api";
 import { useState } from "react";
 import { toast } from "react-toastify";
+import styles from "./style.module.scss";
 
 export const RegisterForm = () => {
   const {
@@ -20,11 +21,14 @@ export const RegisterForm = () => {
 
   const [loading, setLoading] = useState(false);
 
+  const navigate = useNavigate();
+
   const clientRegister = async (formData) => {
     try {
       setLoading(true);
       await signContactApi.post("/clients", formData);
       toast.success("Cadastro realizado com sucesso!");
+      navigate("/");
     } catch (error) {
       if (
         error.response?.data.message == "Email Already exists" ||
@@ -42,16 +46,17 @@ export const RegisterForm = () => {
   };
 
   return (
-    <div>
+    <div className="container form">
       <form onSubmit={handleSubmit(submit)}>
-        <div>
+        <div className={styles.arrowFlexbox}>
           <div>
-            <h3>Cadastro</h3>
-            <p>Preencha os campos para cadastrar-se</p>
+            <h3 className="title one">Cadastro</h3>
           </div>
-          <div>
-            <AiOutlineArrowLeft />
-            <Link to={"/"}>Voltar</Link>
+          <div className={styles.gapArrow}>
+            <AiOutlineArrowLeft className="arrow" />
+            <Link className="link" to={"/"}>
+              Voltar
+            </Link>
           </div>
         </div>
         <Input
@@ -92,9 +97,11 @@ export const RegisterForm = () => {
           error={errors.phone}
           disabled={loading}
         />
-        <button type="submit" disabled={loading}>
-          {loading ? "Cadastrando" : "Cadastrar-se"}
-        </button>
+        <div className={styles.btn}>
+          <button className="btn" type="submit" disabled={loading}>
+            {loading ? "Cadastrando" : "Cadastrar-se"}
+          </button>
+        </div>
       </form>
     </div>
   );
