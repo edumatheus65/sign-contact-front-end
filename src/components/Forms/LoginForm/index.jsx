@@ -1,46 +1,29 @@
 import { useForm } from "react-hook-form";
 import { Input } from "../Input";
 import { InputPassword } from "../InputPassword";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { loginFormSchema } from "./loginFormSchema";
-import { useState } from "react";
-import { signContactApi } from "../../../services/api";
-import { toast } from "react-toastify";
+import { useContext, useState } from "react";
 import styles from "./styles.module.scss";
+import { ClientContext } from "../../../providers/ClientContext";
 
-export const LoginForm = ({ setClient }) => {
+export const LoginForm = () => {
   const {
     register,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm({
     resolver: zodResolver(loginFormSchema),
   });
 
-  const navigate = useNavigate();
-
   const [loading, setLoading] = useState(false);
 
-  const clientLoginRequest = async (formData) => {
-    try {
-      setLoading(true);
-      const { data } = await signContactApi.post("/login", formData);
-      setClient(data.client);
-      toast.success(`Seja bem vindo, ${data.client.fullName}`);
-      localStorage.setItem("@ClientToken", JSON.stringify(data.token));
-      navigate("/dashboard");
-    } catch (error) {
-      if (error.response?.data.message == "Invalid Credentials !") {
-        toast.error("E-mail e/ou senha inválidos");
-      }
-    } finally {
-      setLoading(false);
-    }
-  };
+  const { clientLoginRequest } = useContext(ClientContext);
 
   const submit = (formData) => {
-    clientLoginRequest(formData);
+    clientLoginRequest(formData, setLoading, reset);
   };
 
   return (

@@ -1,48 +1,30 @@
 import { AiOutlineArrowLeft } from "react-icons/ai";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { Input } from "../Input";
 import { InputPassword } from "../InputPassword";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { registerFormSchema } from "./registerFormSchema";
-import { signContactApi } from "../../../services/api";
-import { useState } from "react";
-import { toast } from "react-toastify";
+import { useContext, useState } from "react";
 import styles from "./style.module.scss";
+import { ClientContext } from "../../../providers/ClientContext";
 
 export const RegisterForm = () => {
   const {
     register,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm({
     resolver: zodResolver(registerFormSchema),
   });
 
   const [loading, setLoading] = useState(false);
 
-  const navigate = useNavigate();
-
-  const clientRegister = async (formData) => {
-    try {
-      setLoading(true);
-      await signContactApi.post("/clients", formData);
-      toast.success("Cadastro realizado com sucesso!");
-      navigate("/");
-    } catch (error) {
-      if (
-        error.response?.data.message == "Email Already exists" ||
-        error.response?.data.message == "Phone Already exists"
-      ) {
-        toast.error("Cliente já cadastrado");
-      }
-    } finally {
-      setLoading(false);
-    }
-  };
+  const { clientRegister } = useContext(ClientContext);
 
   const submit = (formdata) => {
-    clientRegister(formdata);
+    clientRegister(formdata, setLoading, reset);
   };
 
   return (
