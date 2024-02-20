@@ -1,4 +1,4 @@
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { signContactApi } from "../services/api";
 import { toast } from "react-toastify";
@@ -10,10 +10,34 @@ export const ClientProvider = ({ children }) => {
 
   const navigate = useNavigate();
 
+  useEffect(() => {
+    const getClientToken = localStorage.getItem("@ClientToken");
+    const getClientId = localStorage.getItem("@ClientId");
+
+    const getOneClient = async () => {
+      try {
+        const { data } = await signContactApi.get(`/clients/${getClientId}`, {
+          headers: {
+            Authorization: `Bearer ${getClientToken}`,
+          },
+        });
+        setClient(data);
+        navigate("/dashboard");
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    if (getClientId && getClientToken) {
+      getOneClient();
+    }
+  }, []);
+
   const clientLogout = () => {
     setClient(null);
     toast.warning("Deslogando...");
     localStorage.removeItem("@ClientToken");
+    localStorage.removeItem("@ClientId");
     navigate("/");
   };
 
@@ -23,7 +47,8 @@ export const ClientProvider = ({ children }) => {
       const { data } = await signContactApi.post("/login", formData);
       setClient(data.client);
       toast.success(`Seja bem vindo, ${data.client.fullName}`);
-      localStorage.setItem("@ClientToken", JSON.stringify(data.token));
+      localStorage.setItem("@ClientToken", data.token);
+      localStorage.setItem("@ClientId", data.client.id);
       reset();
       navigate("/dashboard");
     } catch (error) {
@@ -56,7 +81,13 @@ export const ClientProvider = ({ children }) => {
 
   return (
     <ClientContext.Provider
-      value={{ client, setClient, clientLogout, clientLoginRequest,clientRegister }}
+      value={{
+        client,
+        setClient,
+        clientLogout,
+        clientLoginRequest,
+        clientRegister,
+      }}
     >
       {children}
     </ClientContext.Provider>
