@@ -5,8 +5,9 @@ import { Input } from "../Input";
 import { InputPassword } from "../InputPassword";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { registerFormSchema } from "./registerFormSchema";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import styles from "./style.module.scss";
+import { ClientContext } from "../../../providers/ClientContext";
 
 export const RegisterForm = () => {
   const {
@@ -19,6 +20,8 @@ export const RegisterForm = () => {
   });
 
   const [loading, setLoading] = useState(false);
+
+  const { clientRegister } = useContext(ClientContext);
 
   const submit = (formdata) => {
     clientRegister(formdata, setLoading, reset);
