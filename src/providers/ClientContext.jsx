@@ -8,6 +8,8 @@ export const ClientContext = createContext({});
 export const ClientProvider = ({ children }) => {
   const [client, setClient] = useState(null);
 
+  const [loading, setLoading] = useState(false);
+
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -16,6 +18,7 @@ export const ClientProvider = ({ children }) => {
 
     const getOneClient = async () => {
       try {
+        setLoading(true);
         const { data } = await signContactApi.get(`/clients/${getClientId}`, {
           headers: {
             Authorization: `Bearer ${getClientToken}`,
@@ -25,6 +28,8 @@ export const ClientProvider = ({ children }) => {
         navigate("/dashboard");
       } catch (error) {
         console.log(error);
+      } finally {
+        setLoading(false);
       }
     };
 
@@ -82,6 +87,8 @@ export const ClientProvider = ({ children }) => {
   return (
     <ClientContext.Provider
       value={{
+        loading,
+        setLoading,
         client,
         setClient,
         clientLogout,
