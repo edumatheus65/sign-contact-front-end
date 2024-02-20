@@ -6,6 +6,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { loginFormSchema } from "./loginFormSchema";
 import { useContext, useState } from "react";
 import styles from "./styles.module.scss";
+import { ClientContext } from "../../../providers/ClientContext";
 
 export const LoginForm = () => {
   const {
