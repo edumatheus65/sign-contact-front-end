@@ -12,6 +12,10 @@ export const ClientProvider = ({ children }) => {
 
   const navigate = useNavigate();
 
+  const pathname = window.location;
+
+  console.log(pathname);
+
   useEffect(() => {
     const getClientToken = localStorage.getItem("@ClientToken");
     const getClientId = localStorage.getItem("@ClientId");
