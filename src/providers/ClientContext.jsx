@@ -12,9 +12,7 @@ export const ClientProvider = ({ children }) => {
 
   const navigate = useNavigate();
 
-  const pathname = window.location;
-
-  console.log(pathname);
+  const pathname = window.location.pathname;
 
   useEffect(() => {
     const getClientToken = localStorage.getItem("@ClientToken");
@@ -29,7 +27,7 @@ export const ClientProvider = ({ children }) => {
           },
         });
         setClient(data);
-        navigate("/dashboard");
+        navigate(pathname);
       } catch (error) {
         console.log(error);
       } finally {
