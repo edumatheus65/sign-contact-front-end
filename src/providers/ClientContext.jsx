@@ -1,5 +1,5 @@
 import { createContext, useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { signContactApi } from "../services/api";
 import { toast } from "react-toastify";
 
@@ -9,6 +9,8 @@ export const ClientProvider = ({ children }) => {
   const [client, setClient] = useState(null);
 
   const [loading, setLoading] = useState(false);
+
+  const { state } = useLocation();
 
   const navigate = useNavigate();
 
@@ -57,7 +59,7 @@ export const ClientProvider = ({ children }) => {
       localStorage.setItem("@ClientToken", data.token);
       localStorage.setItem("@ClientId", data.client.id);
       reset();
-      navigate("/dashboard");
+      navigate(state?.lastRoute ? state.lastRoute : "/dashboard");
     } catch (error) {
       if (error.response?.data.message == "Invalid Credentials !") {
         toast.error("E-mail e/ou senha inválidos");
