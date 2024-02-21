@@ -44,7 +44,7 @@ export const RegisterForm = () => {
         <Input
           label="Nome Completo:"
           type="text"
-          placeholder="Digite o seu nome completo"
+          placeholder="Digite o seu nome completo:"
           {...register("fullName")}
           error={errors.fullName}
           disabled={loading}

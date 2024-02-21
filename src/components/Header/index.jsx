@@ -4,17 +4,19 @@ import styles from "./style.module.scss";
 
 export const Header = () => {
   return (
-    <header>
+    <header className={styles.header}>
       <div className="container">
-        <div className={styles.flexbox}>
-          <img src={Logo} alt="Logo Sign Contact" />
-          <div className={styles.containerBtn}>
-            <Link className="signupBtn" to="/register">
-              Cadastre-se
-            </Link>
-            <Link className="btn" to="/">
-              Entrar
-            </Link>
+        <div>
+          <div className={styles.flexbox}>
+            <img src={Logo} alt="Logo Sign Contact" />
+            <div className={styles.containerBtn}>
+              <Link className="signupBtn" to="/register">
+                Cadastre-se
+              </Link>
+              <Link className="btn" to="/">
+                Entrar
+              </Link>
+            </div>
           </div>
         </div>
       </div>
