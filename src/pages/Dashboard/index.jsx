@@ -1,19 +1,24 @@
 import { useContext } from "react";
 import Logo from "../../assets/Logo.png";
 import { ClientContext } from "../../providers/ClientContext";
+import { HeaderDashboard } from "../../components/HeaderDashboard";
 
 export const Dashboard = () => {
-  const { client, clientLogout } = useContext(ClientContext);
+  const { client } = useContext(ClientContext);
 
   return (
-    <div>
-      <div>
-        <img src={Logo} alt="Logo Sign Contact" />
+    <>
+      <HeaderDashboard />
+      <main>
         <div>
-          <p>Olá, {client?.fullName}</p>
-          <button onClick={() => clientLogout()}>Sair</button>
+          <div className="container">
+            <div>
+              <h3>Seja bem-vindo, {client?.fullName}</h3>
+              <p>{client?.email}</p>
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
+      </main>
+    </>
   );
 };
