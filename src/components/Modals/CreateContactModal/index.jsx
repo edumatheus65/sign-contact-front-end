@@ -4,6 +4,8 @@ import { Input } from "../../Forms/Input";
 import { IoPersonAddSharp } from "react-icons/io5";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { CreateContactModalSchema } from "./CreateContactModalSchema";
+import { ContactContext } from "../../../providers/ContactContext";
+import { useContext } from "react";
 
 export const CreateContactModal = () => {
   const {
@@ -13,6 +15,7 @@ export const CreateContactModal = () => {
   } = useForm({
     resolver: zodResolver(CreateContactModalSchema),
   });
+  const { setCreateNewContactModal } = useContext(ContactContext);
 
   // const submitNewContact = (formData)=>{
 
@@ -22,7 +25,11 @@ export const CreateContactModal = () => {
       <div>
         <div>
           <h3>ADICIONAR CONTATO</h3>
-          <button title="fechar" aria-label="close">
+          <button
+            onClick={() => setCreateNewContactModal(false)}
+            title="fechar"
+            aria-label="close"
+          >
             <IoCloseSharp />
           </button>
         </div>

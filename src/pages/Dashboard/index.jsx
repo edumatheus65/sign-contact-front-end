@@ -2,9 +2,12 @@ import { useContext } from "react";
 import { ClientContext } from "../../providers/ClientContext";
 import { HeaderDashboard } from "../../components/HeaderDashboard";
 import { SignContactSection } from "../../components/SignContactSection";
+import { ContactContext } from "../../providers/ContactContext";
+import { CreateContactModal } from "../../components/Modals/CreateContactModal";
 
 export const Dashboard = () => {
   const { client } = useContext(ClientContext);
+  const { createNewContactModal } = useContext(ContactContext);
 
   return (
     <>
@@ -18,6 +21,7 @@ export const Dashboard = () => {
             </div>
           </div>
         </div>
+        {createNewContactModal ? <CreateContactModal /> : null}
         <SignContactSection />
       </main>
     </>
