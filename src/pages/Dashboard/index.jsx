@@ -1,7 +1,7 @@
 import { useContext } from "react";
-import Logo from "../../assets/Logo.png";
 import { ClientContext } from "../../providers/ClientContext";
 import { HeaderDashboard } from "../../components/HeaderDashboard";
+import { SignContactSection } from "../../components/SignContactSection";
 
 export const Dashboard = () => {
   const { client } = useContext(ClientContext);
@@ -13,11 +13,12 @@ export const Dashboard = () => {
         <div>
           <div className="container">
             <div>
-              <h3>Seja bem-vindo, {client?.fullName}</h3>
-              <p>{client?.email}</p>
+              <h3 className="title one"> Bem-vindo, {client?.fullName}</h3>
+              <p className="paragraph failed">{client?.email}</p>
             </div>
           </div>
         </div>
+        <SignContactSection />
       </main>
     </>
   );

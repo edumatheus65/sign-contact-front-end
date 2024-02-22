@@ -10,7 +10,7 @@ export const HeaderDashboard = () => {
       <div className="container">
         <div>
           <img src={Logo} alt="Logo Sign Contact" />
-          <button className="btn" onClick={() => clientLogout()}>
+          <button className="signupBtn" onClick={() => clientLogout()}>
             Sair <RiLogoutCircleLine />
           </button>
         </div>
