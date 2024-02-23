@@ -1,19 +1,29 @@
 import { useContext } from "react";
-import Logo from "../../assets/Logo.png";
 import { ClientContext } from "../../providers/ClientContext";
+import { HeaderDashboard } from "../../components/HeaderDashboard";
+import { SignContactSection } from "../../components/SignContactSection";
+import { ContactContext } from "../../providers/ContactContext";
+import { CreateContactModal } from "../../components/Modals/CreateContactModal";
 
 export const Dashboard = () => {
-  const { client, clientLogout } = useContext(ClientContext);
+  const { client } = useContext(ClientContext);
+  const { createNewContactModal } = useContext(ContactContext);
 
   return (
-    <div>
-      <div>
-        <img src={Logo} alt="Logo Sign Contact" />
+    <>
+      <HeaderDashboard />
+      <main>
         <div>
-          <p>Olá, {client?.fullName}</p>
-          <button onClick={() => clientLogout()}>Sair</button>
+          <div className="container">
+            <div>
+              <h3 className="title one"> Bem-vindo, {client?.fullName}</h3>
+              <p className="paragraph failed">{client?.email}</p>
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
+        {createNewContactModal ? <CreateContactModal /> : null}
+        <SignContactSection />
+      </main>
+    </>
   );
 };
