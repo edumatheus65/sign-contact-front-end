@@ -1,46 +1,43 @@
 import { useForm } from "react-hook-form";
 import { IoCloseSharp } from "react-icons/io5";
 import { Input } from "../../Forms/Input";
-import { IoPersonAddSharp } from "react-icons/io5";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { CreateContactModalSchema } from "./CreateContactModalSchema";
 import { ContactContext } from "../../../providers/ContactContext";
 import { useContext } from "react";
-import styles from "./style.module.scss";
+import { RxUpdate } from "react-icons/rx";
 
-export const CreateContactModal = () => {
+export const UpdateContactModal = () => {
+  const { editingContact, setEditingContact, updateContact } =
+    useContext(ContactContext);
+
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm({
-    resolver: zodResolver(CreateContactModalSchema),
+    defaultValues: {
+      fullName: editingContact.fullName,
+      email: editingContact.email,
+      phone: editingContact.phone,
+    },
   });
 
-  const { setCreateNewContactModal, createContact } =
-    useContext(ContactContext);
-
-  const submitNewContact = async (formData) => {
-    await createContact(formData);
+  const submitUpdatedContact = async (formData) => {
+    updateContact(formData);
   };
   return (
-    <div className={styles.modalOverlay} role="dialog">
-      <div className={styles.modalBox}>
-        <div className={styles.ModalHeaders}>
-          <h3 className="title two">ADICIONAR CONTATO</h3>
+    <div role="dialog">
+      <div>
+        <div>
+          <h3>ADICIONAR CONTATO</h3>
           <button
-            onClick={() => setCreateNewContactModal(false)}
+            onClick={() => setEditingContact(null)}
             title="fechar"
             aria-label="close"
-            className="iconsBtn"
           >
-            <IoCloseSharp size={22} />
+            <IoCloseSharp />
           </button>
         </div>
-        <form
-          onSubmit={handleSubmit(submitNewContact)}
-          className={styles.formModal}
-        >
+        <form onSubmit={handleSubmit(submitUpdatedContact)}>
           <Input
             type="text"
             placeholder="Nome Completo:"
@@ -61,8 +58,8 @@ export const CreateContactModal = () => {
           />
           <div>
             <button className="btn" type="submit">
-              Adicionar
-              <IoPersonAddSharp size={20} />
+              Salvar Alterações
+              <RxUpdate />
             </button>
           </div>
         </form>

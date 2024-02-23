@@ -1,7 +1,6 @@
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 import { signContactApi } from "../services/api";
 import { toast } from "react-toastify";
-import { ClientContext } from "./ClientContext";
 
 export const ContactContext = createContext({});
 
@@ -9,6 +8,7 @@ export const ContactProvider = ({ children }) => {
   const [contactList, setContactList] = useState([]);
   const [createNewContactModal, setCreateNewContactModal] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [editingContact, setEditingContact] = useState(null);
 
   const createContact = async (formData) => {
     try {
@@ -18,7 +18,6 @@ export const ContactProvider = ({ children }) => {
           Authorization: `Bearer ${getClientToken}`,
         },
       });
-      console.log(data);
       setContactList([...contactList, data]);
       toast.success("Contato criado com sucesso!!!");
       setCreateNewContactModal(false);
@@ -48,6 +47,35 @@ export const ContactProvider = ({ children }) => {
     getClientContacts();
   }, []);
 
+  const updateContact = async (formData) => {
+    try {
+      const getClientToken = localStorage.getItem("@ClientToken");
+      const { data } = await signContactApi.patch(
+        `/contacts/${editingContact.id.toString()}`,
+        formData,
+        {
+          headers: {
+            Authorization: `Bearer ${getClientToken}`,
+          },
+        }
+      );
+      console.log(data);
+      console.log(contactList);
+      const newContactList = contactList.map((contact) => {
+        if (contact.id === editingContact.id) {
+          return data;
+        } else {
+          return contact;
+        }
+      });
+      setContactList(newContactList);
+      setEditingContact(null);
+      toast.success("Contato atualizado com sucesso!");
+    } catch {
+      toast.error("Ops, algo deu errado!");
+    }
+  };
+
   const deleteContact = async (deleteId) => {
     try {
       const getClientToken = localStorage.getItem("@ClientToken");
@@ -60,7 +88,10 @@ export const ContactProvider = ({ children }) => {
         (contact) => contact.id !== deleteId
       );
       setContactList(filterContacts);
-    } catch (error) {}
+      toast.success("Contato excluído com sucesso!");
+    } catch {
+      toast.error("Não foi possível excluir o contato!");
+    }
   };
 
   return (
@@ -71,6 +102,10 @@ export const ContactProvider = ({ children }) => {
         createContact,
         contactList,
         loading,
+        deleteContact,
+        editingContact,
+        setEditingContact,
+        updateContact,
       }}
     >
       {children}

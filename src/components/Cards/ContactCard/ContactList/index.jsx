@@ -1,7 +1,10 @@
 import { HiMiniPencil } from "react-icons/hi2";
 import { CiTrash } from "react-icons/ci";
+import { useContext } from "react";
+import { ContactContext } from "../../../../providers/ContactContext";
 
 export const ContactList = ({ contact }) => {
+  const { deleteContact, setEditingContact } = useContext(ContactContext);
   return (
     <li>
       <div>
@@ -11,10 +14,10 @@ export const ContactList = ({ contact }) => {
           <p>{contact.phone}</p>
         </div>
         <div>
-          <button>
+          <button onClick={() => setEditingContact(contact)}>
             <HiMiniPencil size={15} />
           </button>
-          <button>
+          <button onClick={() => deleteContact(contact.id)}>
             <CiTrash size={15} />
           </button>
         </div>
