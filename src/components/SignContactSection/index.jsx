@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import { IoPersonAddSharp } from "react-icons/io5";
 import { ContactContext } from "../../providers/ContactContext";
+import { ContactCard } from "../Cards/ContactCard";
 
 export const SignContactSection = () => {
   const { setCreateNewContactModal } = useContext(ContactContext);
@@ -16,6 +17,7 @@ export const SignContactSection = () => {
             Adicionar
             <IoPersonAddSharp size={21} />
           </button>
+          <ContactCard />
         </div>
       </div>
     </section>

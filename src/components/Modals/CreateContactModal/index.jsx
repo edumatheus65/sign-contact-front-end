@@ -15,11 +15,13 @@ export const CreateContactModal = () => {
   } = useForm({
     resolver: zodResolver(CreateContactModalSchema),
   });
-  const { setCreateNewContactModal } = useContext(ContactContext);
 
-  // const submitNewContact = (formData)=>{
+  const { setCreateNewContactModal, createContact } =
+    useContext(ContactContext);
 
-  // }
+  const submitNewContact = async (formData) => {
+    await createContact(formData);
+  };
   return (
     <div role="dialog">
       <div>
@@ -33,7 +35,7 @@ export const CreateContactModal = () => {
             <IoCloseSharp />
           </button>
         </div>
-        <form>
+        <form onSubmit={handleSubmit(submitNewContact)}>
           <Input
             type="text"
             placeholder="Nome Completo:"
@@ -53,7 +55,7 @@ export const CreateContactModal = () => {
             error={errors.phone}
           />
           <div>
-            <button type="submit">
+            <button className="btn" type="submit">
               Adicionar
               <IoPersonAddSharp size={20} />
             </button>
