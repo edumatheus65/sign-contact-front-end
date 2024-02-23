@@ -4,6 +4,7 @@ import { Input } from "../../Forms/Input";
 import { ContactContext } from "../../../providers/ContactContext";
 import { useContext } from "react";
 import { RxUpdate } from "react-icons/rx";
+import styles from "./style.module.scss";
 
 export const UpdateContactModal = () => {
   const { editingContact, setEditingContact, updateContact } =
@@ -25,41 +26,34 @@ export const UpdateContactModal = () => {
     updateContact(formData);
   };
   return (
-    <div role="dialog">
-      <div>
-        <div>
-          <h3>ADICIONAR CONTATO</h3>
+    <div role="dialog" className={styles.modalOverlay}>
+      <div className={styles.modalBox}>
+        <div className={styles.ModalHeaders}>
+          <h3 className="title two">EDITAR CONTATO</h3>
           <button
             onClick={() => setEditingContact(null)}
             title="fechar"
             aria-label="close"
+            className="iconsBtn"
           >
-            <IoCloseSharp />
+            <IoCloseSharp size={22} />
           </button>
         </div>
-        <form onSubmit={handleSubmit(submitUpdatedContact)}>
+        <form
+          className={styles.formModal}
+          onSubmit={handleSubmit(submitUpdatedContact)}
+        >
           <Input
             type="text"
-            placeholder="Nome Completo:"
             {...register("fullName")}
             error={errors.fullName}
           />
-          <Input
-            type="email"
-            placeholder="E-mails:"
-            {...register("email")}
-            error={errors.email}
-          />
-          <Input
-            type="text"
-            placeholder="Telefones:"
-            {...register("phone")}
-            error={errors.phone}
-          />
+          <Input type="email" {...register("email")} error={errors.email} />
+          <Input type="text" {...register("phone")} error={errors.phone} />
           <div>
             <button className="btn" type="submit">
               Salvar Alterações
-              <RxUpdate />
+              <RxUpdate size={20} />
             </button>
           </div>
         </form>

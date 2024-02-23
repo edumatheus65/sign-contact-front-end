@@ -1,5 +1,5 @@
 import { HiMiniPencil } from "react-icons/hi2";
-import { CiTrash } from "react-icons/ci";
+import { RiDeleteBin6Fill } from "react-icons/ri";
 import { useContext } from "react";
 import { ContactContext } from "../../../../providers/ContactContext";
 
@@ -9,16 +9,22 @@ export const ContactList = ({ contact }) => {
     <li>
       <div>
         <div>
-          <h3>{contact.fullName}</h3>
-          <p>{contact.email}</p>
-          <p>{contact.phone}</p>
+          <h3 className="title two">{contact.fullName}</h3>
+          <p className="paragraph">{contact.email}</p>
+          <p className="paragraph">{contact.phone}</p>
         </div>
         <div>
-          <button onClick={() => setEditingContact(contact)}>
+          <button
+            className="cardIcon"
+            onClick={() => setEditingContact(contact)}
+          >
             <HiMiniPencil size={15} />
           </button>
-          <button onClick={() => deleteContact(contact.id)}>
-            <CiTrash size={15} />
+          <button
+            className="cardIcon"
+            onClick={() => deleteContact(contact.id)}
+          >
+            <RiDeleteBin6Fill size={15} />
           </button>
         </div>
       </div>

@@ -1,7 +1,6 @@
 import { useContext } from "react";
 import { ContactContext } from "../../../providers/ContactContext";
 import { ContactList } from "./ContactList";
-import { ClientContext } from "../../../providers/ClientContext";
 
 export const ContactCard = () => {
   const { contactList } = useContext(ContactContext);

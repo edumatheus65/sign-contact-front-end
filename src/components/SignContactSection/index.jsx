@@ -11,7 +11,7 @@ export const SignContactSection = () => {
     <section>
       <div className="container">
         <div>
-          <h3 className="title two">Adicione os seus contatos:</h3>
+          <h3 className="title one">Adicione os seus contatos:</h3>
           <button
             className="btn"
             onClick={() => setCreateNewContactModal(true)}

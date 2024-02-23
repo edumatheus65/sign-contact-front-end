@@ -49,13 +49,13 @@ export const CreateContactModal = () => {
           />
           <Input
             type="email"
-            placeholder="E-mails:"
+            placeholder="E-mail:"
             {...register("email")}
             error={errors.email}
           />
           <Input
             type="text"
-            placeholder="Telefones:"
+            placeholder="Telefone:"
             {...register("phone")}
             error={errors.phone}
           />
