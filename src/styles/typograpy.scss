@@ -19,6 +19,10 @@
     font-size: 1rem;
   }
 
+  &.five {
+    font-size: clamp(0.4rem, 4vw, 0.8rem);
+  }
+
   &.menu {
     font-size: 0.875rem;
   }
