@@ -1,0 +1,14 @@
+.flexbox {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+@media (min-width: 500px) {
+  .flexbox {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+}
