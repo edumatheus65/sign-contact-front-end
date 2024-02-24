@@ -59,8 +59,6 @@ export const ContactProvider = ({ children }) => {
           },
         }
       );
-      console.log(data);
-      console.log(contactList);
       const newContactList = contactList.map((contact) => {
         if (contact.id === editingContact.id) {
           return data;
