@@ -9,7 +9,9 @@ export const ContactCard = () => {
     <ul>
       {contactList.length > 0
         ? contactList?.map((contact) => (
-            <ContactList key={contact.id} contact={contact} />
+            <div key={contact.id}>
+              <ContactList contact={contact} />
+            </div>
           ))
         : null}
     </ul>

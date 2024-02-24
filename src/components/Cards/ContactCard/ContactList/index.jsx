@@ -1,10 +1,13 @@
 import { HiMiniPencil } from "react-icons/hi2";
 import { RiDeleteBin6Fill } from "react-icons/ri";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { ContactContext } from "../../../../providers/ContactContext";
+import { DeleteContactModal } from "../../../Modals/DeleteContactModal";
 
 export const ContactList = ({ contact }) => {
-  const { deleteContact, setEditingContact } = useContext(ContactContext);
+  const { setEditingContact } = useContext(ContactContext);
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+
   return (
     <li>
       <div>
@@ -20,13 +23,16 @@ export const ContactList = ({ contact }) => {
           >
             <HiMiniPencil size={15} />
           </button>
-          <button
-            className="cardIcon"
-            onClick={() => deleteContact(contact.id)}
-          >
+          <button className="cardIcon" onClick={() => setShowDeleteModal(true)}>
             <RiDeleteBin6Fill size={15} />
           </button>
         </div>
+        {showDeleteModal && (
+          <DeleteContactModal
+            contact={contact}
+            onClose={() => setShowDeleteModal(false)}
+          />
+        )}
       </div>
     </li>
   );
