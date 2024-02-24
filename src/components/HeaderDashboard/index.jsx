@@ -7,7 +7,7 @@ import styles from "./style.module.scss";
 export const HeaderDashboard = () => {
   const { clientLogout } = useContext(ClientContext);
   return (
-    <header>
+    <header className={styles.header}>
       <div className="container">
         <div className={styles.flexbox}>
           <img src={Logo} alt="Logo Sign Contact" />
