@@ -4,7 +4,12 @@
   color: var(--color-white);
 
   &.one {
-    font-size: clamp(1.2rem, 4vw, 1.6rem);
+    font-size: clamp(0.8rem, 4vw, 1.4rem);
+  }
+
+  &.yellow {
+    font-size: clamp(0.8rem, 4vw, 1.4rem);
+    color: var(--color-yellow);
   }
 
   &.two {
@@ -31,7 +36,7 @@
 .paragraph {
   font-family: var(--font-secondary);
   font-weight: 400;
-  font-size: 0.8rem;
+  font-size: clamp(0.5rem, 3vw, 0.8rem);
   color: var(--color-white);
 
   &.failed {
