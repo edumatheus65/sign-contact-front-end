@@ -1,0 +1,13 @@
+:root {
+  --font-primary: "Poppins", sans-serif;
+  --font-secondary: "Inter", sans-serif;
+  --color-black: #000000;
+  --color-white: #ffffff;
+  --color-gray-1: #3d3d3d;
+  --color-gray-2: #171717;
+  --color-yellow: #ffbb38;
+}
+
+body {
+  background-color: var(--color-black);
+}
