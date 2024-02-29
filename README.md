@@ -46,8 +46,8 @@ estilização
 
 ## Contato
 <p>Alguma dúvida sobre o projeto ou deseja contribuir de algumas forma?</p>
-<a>bernardogvalim@gmail.com</a>
-<a>https://www.linkedin.com/in/bernardo-valim/</a>
+-bernardogvalim@gmail.com
+-https://www.linkedin.com/in/bernardo-valim/
 
 
 
