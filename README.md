@@ -37,6 +37,10 @@ estilização
 #### Modal de Exclusão de Contato:
 ![image](https://github.com/Kenzie-Academy-Brasil-Developers/desafio-fullstack-front-end_ber_valim/assets/105017120/a89f867a-6256-49ec-ab41-e880fa65ca1e)
 
+## Consumo Api:
+- Neste projeto fullstack, estou consumindo uma API de minha autoria
+- Documentação da API: https://desafio-fullstack-api.onrender.com/api-documentation/#/
+- Repositório da API: https://github.com/bervalim/sign-contact-api
 ## Acessando o projeto:
 - Para acessar o projeto, utilize este link do Vercel: https://desafio-fullstack-front-end-ber-valim.vercel.app/
 - Ou, baixe o repositório e insira o comando npm install para instalar todas as dependências. Após isso, insira npm install para rodal o projeto no localhost 5173.
