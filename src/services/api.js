@@ -1,6 +1,6 @@
-import axios from "axios";
+import axios from "axios"; 
 
 export const signContactApi = axios.create({
-  baseURL: "https://desafio-fullstack-api.onrender.com",
+  baseURL: import.meta.env.VITE_BASE_URL,
   timeout: 11 * 1000,
 });
